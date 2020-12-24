@@ -1,20 +1,16 @@
 
 /* font imports */
 
-@font-face {
-  font-family: 'Vollkorn';
-  src: URL('theme/fonts/Vollkorn-VariableFont_wght.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Fira Code Medium';
-  src: URL('theme/fonts/FiraCode-Medium.ttf') format('truetype');
-}
-
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&display=swap');
 
 :root {
     --content-width: 90ch;
     --margin-width: 240px;
+}
+
+main {
+    flex: 1 1 70%;
 }
 
 /* # Article container */
@@ -38,7 +34,7 @@ img {
 
 p, li, td, th {
     color: #111111;
-    font-family: 'Vollkorn', 'Source Serif Pro', serif;
+    font-family: 'Vollkorn', serif;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
@@ -88,7 +84,7 @@ hr {
 }
 
 code {
-    font-family: 'JuliaMono', 'Fira Code Medium', monospace;
+    font-family: 'Fira Code', 'JuliaMono', monospace;
     font-style: normal;
     font-size: 15px;
     padding: 2px;
@@ -217,8 +213,8 @@ div.footnote > p.footnote-title {
 
 /* # Menu container */
 
-.menu {
-    max-width: 20%;
+/* .menu {
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -226,7 +222,7 @@ div.footnote > p.footnote-title {
     align-items: left;
     margin-top: 8px;
     height: 40px;
-}
+} */
 
 #menu-toggler {
     cursor: pointer;
@@ -265,11 +261,17 @@ div.footnote > p.footnote-title {
 
 /* # Table of contents container */
 
-nav#toc {
-    margin-top: 24px;
+nav {
+    height: 100%;
+    /* width: 160px; */
+    flex: 0 1 30%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    margin-top: 50px;
     max-width: var(--content-width);
-    margin-left: auto;
-    margin-right: auto;
+    overflow-x: hidden;
 }
 
 
@@ -370,65 +372,3 @@ From https://github.com/highlightjs/highlight.js/blob/master/src/styles/atom-one
 .hljs-formula {
   color: #666;
 }
-/*
-
-
-
-
-.hljs-section,
-.hljs-name,
-.hljs-selector-tag,
-.hljs-deletion,
-.hljs-subst {
-  color: #e45649;
-}
-
-.hljs-literal {
-  color: #0184bb;
-}
-
-.hljs-string,
-.hljs-regexp,
-.hljs-addition,
-.hljs-attribute,
-.hljs-meta-string {
-  color: #50a14f;
-}
-
-.hljs-built_in,
-.hljs-class .hljs-title {
-  color: #c18401;
-}
-
-.hljs-attr,
-.hljs-variable,
-.hljs-template-variable,
-.hljs-type,
-.hljs-selector-class,
-.hljs-selector-attr,
-.hljs-selector-pseudo,
-.hljs-number {
-  color: #986801;
-}
-
-.hljs-symbol,
-.hljs-bullet,
-.hljs-link,
-.hljs-meta,
-.hljs-selector-id,
-.hljs-title {
-  color: #4078f2;
-}
-
-.hljs-emphasis {
-  font-style: italic;
-}
-
-.hljs-strong {
-  font-weight: bold;
-}
-
-.hljs-link {
-  text-decoration: underline;
-}
-*/
