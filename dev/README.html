@@ -29,7 +29,91 @@
     <main id="page"><article><h1 id="parameterschedulers"><a href="#parameterschedulers" class="anchor"></a>ParameterSchedulers</h1>
 <p><a href="https://darsnack.github.io/ParameterSchedulers.jl/dev"><img src="https://img.shields.io/badge/docs-dev-blue.svg" alt="Dev" /></a>
 <a href="https://github.com/darsnack/ParameterSchedulers.jl/actions"><img src="https://github.com/darsnack/ParameterSchedulers.jl/workflows/CI/badge.svg" alt="Build Status" /></a></p>
-<p>ParameterSchedulers.jl provides common machine learning (ML) schedulers for hyper-parameters.</p>
+<p>ParameterSchedulers.jl provides common machine learning (ML) schedulers for hyper-parameters. Though this package is framework agnostic, a convenient interface for pairing schedules with <a href="https://github.com/FluxML/Flux.jl">Flux.jl</a> optimizers is available. Using this package with Flux is as simple as:</p>
+<pre><code class="language-julia">using Flux, ParameterSchedulers
+
+opt = Exp(Momentum(); λ = 1e-2, γ = 0.8)
+</code></pre>
+<h2 id="available-schedules"><a href="#available-schedules" class="anchor"></a>Available Schedules</h2>
+<p>This is a table of the common schedules implemented, but ParameterSchedulers provides utilities for creating more exotic schedules as well.</p>
+<table>
+<tr>
+    <td> <em>Schedule</em> </td>
+    <td> <em>Description</em> </td>
+    <td> <em>Type</em> </td>
+    <td style="text-align:center"> <em>Example</em> </td>
+</tr>
+<tr><td>
+<p><a href="docstrings/ParameterSchedulers.ParameterSchedulers.html"><code>Step(;λ, γ, step_sizes)</code></a></p>
+</td>
+<td>
+<p>Exponential decay by <code>γ</code> every step in <code>step_sizes</code></p>
+</td>
+<td> Decay </td>
+<td style="text-align:center">
+<pre><code class="plaintext cell-output cell-result" class="language-plaintext">LoadError(&quot;string&quot;, 1, ArgumentError(&quot;Package UnicodePlots not found in current path:\n- Run `import Pkg; Pkg.add(\&quot;UnicodePlots\&quot;)` to install the UnicodePlots package.\n&quot;))</code></pre>
+</td></tr>
+<tr><td>
+<p><a href="docstrings/ParameterSchedulers.ParameterSchedulers.html"><code>Exp(;λ, γ)</code></a></p>
+</td>
+<td>
+<p>Exponential decay by <code>γ</code> every iteration</p>
+</td>
+<td> Decay </td>
+<td style="text-align:center">
+<pre><code class="plaintext cell-output cell-result" class="language-plaintext">LoadError(&quot;string&quot;, 1, ArgumentError(&quot;Package UnicodePlots not found in current path:\n- Run `import Pkg; Pkg.add(\&quot;UnicodePlots\&quot;)` to install the UnicodePlots package.\n&quot;))</code></pre>
+</td></tr>
+<tr><td>
+<p><a href="docstrings/ParameterSchedulers.ParameterSchedulers.html"><code>Poly(;λ, p, max_iter)</code></a></p>
+</td>
+<td>
+<p>Polynomial decay at degree <code>p</code></p>
+</td>
+<td> Decay </td>
+<td style="text-align:center">
+<pre><code class="plaintext cell-output cell-result" class="language-plaintext">LoadError(&quot;string&quot;, 1, ArgumentError(&quot;Package UnicodePlots not found in current path:\n- Run `import Pkg; Pkg.add(\&quot;UnicodePlots\&quot;)` to install the UnicodePlots package.\n&quot;))</code></pre>
+</td></tr>
+<tr><td>
+<p><a href="docstrings/ParameterSchedulers.ParameterSchedulers.html"><code>Inv(;λ, γ, p)</code></a></p>
+</td>
+<td>
+<p>Inverse decay at rate <code>(1 + tγ)^p</code></p>
+</td>
+<td> Decay </td>
+<td style="text-align:center">
+<pre><code class="plaintext cell-output cell-result" class="language-plaintext">LoadError(&quot;string&quot;, 1, ArgumentError(&quot;Package UnicodePlots not found in current path:\n- Run `import Pkg; Pkg.add(\&quot;UnicodePlots\&quot;)` to install the UnicodePlots package.\n&quot;))</code></pre>
+</td></tr>
+<tr><td>
+<p><a href="docstrings/ParameterSchedulers.ParameterSchedulers.html"><code>Tri(;λ0, λ1, period)</code></a></p>
+</td>
+<td>
+<p><a href="https://en.wikipedia.org/wiki/Triangle_wave">Triangle wave</a> function</p>
+</td>
+<td> Cyclic </td>
+<td style="text-align:center">
+<pre><code class="plaintext cell-output cell-result" class="language-plaintext">LoadError(&quot;string&quot;, 1, ArgumentError(&quot;Package UnicodePlots not found in current path:\n- Run `import Pkg; Pkg.add(\&quot;UnicodePlots\&quot;)` to install the UnicodePlots package.\n&quot;))</code></pre>
+</td></tr>
+<tr><td>
+<p><a href="docstrings/ParameterSchedulers.ParameterSchedulers.html"><code>TriDecay2(;λ0, λ1, period)</code></a></p>
+</td>
+<td>
+<p><a href="https://en.wikipedia.org/wiki/Triangle_wave">Triangle wave</a> function with half the amplitude every <code>period</code></p>
+</td>
+<td> Cyclic </td>
+<td style="text-align:center">
+<pre><code class="plaintext cell-output cell-result" class="language-plaintext">LoadError(&quot;string&quot;, 1, ArgumentError(&quot;Package UnicodePlots not found in current path:\n- Run `import Pkg; Pkg.add(\&quot;UnicodePlots\&quot;)` to install the UnicodePlots package.\n&quot;))</code></pre>
+</td></tr>
+<tr><td>
+<p><a href="docstrings/ParameterSchedulers.ParameterSchedulers.html"><code>TriExp(;λ0, λ1, period, γ)</code></a></p>
+</td>
+<td>
+<p><a href="https://en.wikipedia.org/wiki/Triangle_wave">Triangle wave</a> function with exponential amplitude decay at rate <code>γ</code></p>
+</td>
+<td> Cyclic </td>
+<td style="text-align:center">
+<pre><code class="plaintext cell-output cell-result" class="language-plaintext">LoadError(&quot;string&quot;, 1, ArgumentError(&quot;Package UnicodePlots not found in current path:\n- Run `import Pkg; Pkg.add(\&quot;UnicodePlots\&quot;)` to install the UnicodePlots package.\n&quot;))</code></pre>
+</td></tr>
+</table>
 </article>
         <div id="page-navigation">
             <a id="previous-page" title="Previous" href="README.html"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.2426 6.34317L14.8284 4.92896L7.75739 12L14.8285 19.0711L16.2427 17.6569L10.5858 12L16.2426 6.34317Z" fill="currentColor" /></svg></a>
