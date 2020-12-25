@@ -32,7 +32,7 @@
 <p>Since every schedule is a standard iterator, we can insert it into a training loop by simply zipping up with another iterator. For example, the following code adjusts the learning rate of the optimizer before each batch of training.</p>
 <pre><code cell="optimizers" class="language-julia">using Flux, ParameterSchedulers
 
-data = [(rand(4, 10), rand([-1, 1], 1, 10)) for _ in 1:5]
+data = [(rand(4, 10), rand([-1, 1], 1, 10)) for _ in 1:3]
 m = Dense(4, 1, tanh)
 p = params(m)
 opt = Descent()
@@ -48,12 +48,10 @@ end
 <pre><code class="plaintext cell-output cell-stream">η: 0.1
 η: 0.020000000000000004
 η: 0.004000000000000001
-η: 0.0008000000000000003
-η: 0.00016000000000000004
 </code></pre>
 <p>We can also adjust the learning on an epoch basis instead. All that is required is to change what we zip our schedule with.</p>
-<pre><code cell="optimizers" class="language-julia">nepochs = 10
-s = Step(λ = 1e-1, γ = 0.2, step_sizes = [5, 3, 2])
+<pre><code cell="optimizers" class="language-julia">nepochs = 6
+s = Step(λ = 1e-1, γ = 0.2, step_sizes = [3, 2, 1])
 for (η, epoch) in zip(s, 1:nepochs)
     opt.eta = η
     for (i, (x, y)) in enumerate(data)
@@ -66,53 +64,21 @@ end
 <pre><code class="plaintext cell-output cell-stream">epoch: 1, batch: 1, η: 0.1
 epoch: 1, batch: 2, η: 0.1
 epoch: 1, batch: 3, η: 0.1
-epoch: 1, batch: 4, η: 0.1
-epoch: 1, batch: 5, η: 0.1
 epoch: 2, batch: 1, η: 0.1
 epoch: 2, batch: 2, η: 0.1
 epoch: 2, batch: 3, η: 0.1
-epoch: 2, batch: 4, η: 0.1
-epoch: 2, batch: 5, η: 0.1
 epoch: 3, batch: 1, η: 0.1
 epoch: 3, batch: 2, η: 0.1
 epoch: 3, batch: 3, η: 0.1
-epoch: 3, batch: 4, η: 0.1
-epoch: 3, batch: 5, η: 0.1
-epoch: 4, batch: 1, η: 0.1
-epoch: 4, batch: 2, η: 0.1
-epoch: 4, batch: 3, η: 0.1
-epoch: 4, batch: 4, η: 0.1
-epoch: 4, batch: 5, η: 0.1
-epoch: 5, batch: 1, η: 0.1
-epoch: 5, batch: 2, η: 0.1
-epoch: 5, batch: 3, η: 0.1
-epoch: 5, batch: 4, η: 0.1
-epoch: 5, batch: 5, η: 0.1
-epoch: 6, batch: 1, η: 0.020000000000000004
-epoch: 6, batch: 2, η: 0.020000000000000004
-epoch: 6, batch: 3, η: 0.020000000000000004
-epoch: 6, batch: 4, η: 0.020000000000000004
-epoch: 6, batch: 5, η: 0.020000000000000004
-epoch: 7, batch: 1, η: 0.020000000000000004
-epoch: 7, batch: 2, η: 0.020000000000000004
-epoch: 7, batch: 3, η: 0.020000000000000004
-epoch: 7, batch: 4, η: 0.020000000000000004
-epoch: 7, batch: 5, η: 0.020000000000000004
-epoch: 8, batch: 1, η: 0.020000000000000004
-epoch: 8, batch: 2, η: 0.020000000000000004
-epoch: 8, batch: 3, η: 0.020000000000000004
-epoch: 8, batch: 4, η: 0.020000000000000004
-epoch: 8, batch: 5, η: 0.020000000000000004
-epoch: 9, batch: 1, η: 0.004000000000000001
-epoch: 9, batch: 2, η: 0.004000000000000001
-epoch: 9, batch: 3, η: 0.004000000000000001
-epoch: 9, batch: 4, η: 0.004000000000000001
-epoch: 9, batch: 5, η: 0.004000000000000001
-epoch: 10, batch: 1, η: 0.004000000000000001
-epoch: 10, batch: 2, η: 0.004000000000000001
-epoch: 10, batch: 3, η: 0.004000000000000001
-epoch: 10, batch: 4, η: 0.004000000000000001
-epoch: 10, batch: 5, η: 0.004000000000000001
+epoch: 4, batch: 1, η: 0.020000000000000004
+epoch: 4, batch: 2, η: 0.020000000000000004
+epoch: 4, batch: 3, η: 0.020000000000000004
+epoch: 5, batch: 1, η: 0.020000000000000004
+epoch: 5, batch: 2, η: 0.020000000000000004
+epoch: 5, batch: 3, η: 0.020000000000000004
+epoch: 6, batch: 1, η: 0.004000000000000001
+epoch: 6, batch: 2, η: 0.004000000000000001
+epoch: 6, batch: 3, η: 0.004000000000000001
 </code></pre>
 <h2 id="stateful-iteration-with-training"><a href="#stateful-iteration-with-training" class="anchor"></a>Stateful iteration with training</h2>
 <p>Sometimes zipping up the schedule with an iterator isn’t sufficient. For example, we might want to advance the schedule with every batch but not be forced to restart each epoch. In such a situation with nested loops, it becomes useful to use <a href="../../docstrings/ParameterSchedulers.ScheduleIterator.html"><code>ScheduleIterator</code></a> which maintains its own iteration state.</p>
@@ -130,18 +96,12 @@ end
 <pre><code class="plaintext cell-output cell-stream">epoch: 1, batch: 1, η: 0.1
 epoch: 1, batch: 2, η: 0.06944444444444445
 epoch: 1, batch: 3, η: 0.05102040816326532
-epoch: 1, batch: 4, η: 0.0390625
-epoch: 1, batch: 5, η: 0.030864197530864196
-epoch: 2, batch: 1, η: 0.025
-epoch: 2, batch: 2, η: 0.02066115702479339
-epoch: 2, batch: 3, η: 0.01736111111111111
-epoch: 2, batch: 4, η: 0.014792899408284023
-epoch: 2, batch: 5, η: 0.01275510204081633
-epoch: 3, batch: 1, η: 0.011111111111111112
-epoch: 3, batch: 2, η: 0.009765625
-epoch: 3, batch: 3, η: 0.008650519031141867
-epoch: 3, batch: 4, η: 0.007716049382716049
-epoch: 3, batch: 5, η: 0.006925207756232687
+epoch: 2, batch: 1, η: 0.0390625
+epoch: 2, batch: 2, η: 0.030864197530864196
+epoch: 2, batch: 3, η: 0.025
+epoch: 3, batch: 1, η: 0.02066115702479339
+epoch: 3, batch: 2, η: 0.01736111111111111
+epoch: 3, batch: 3, η: 0.014792899408284023
 </code></pre>
 <h2 id="working-with-flux-optimizers"><a href="#working-with-flux-optimizers" class="anchor"></a>Working with Flux optimizers</h2>
 <p>While the approaches above can be helpful when dealing with fine-grained training loops, it is usually simpler to just use a <a href="../../docstrings/ParameterSchedulers.ScheduledOptim.html"><code>ScheduledOptim</code></a>.</p>
@@ -159,18 +119,12 @@ end
 <pre><code class="plaintext cell-output cell-stream">epoch: 1, batch: 1, η: 0.06944444444444445
 epoch: 1, batch: 2, η: 0.0390625
 epoch: 1, batch: 3, η: 0.025
-epoch: 1, batch: 4, η: 0.01736111111111111
-epoch: 1, batch: 5, η: 0.01275510204081633
-epoch: 2, batch: 1, η: 0.009765625
-epoch: 2, batch: 2, η: 0.007716049382716049
-epoch: 2, batch: 3, η: 0.00625
-epoch: 2, batch: 4, η: 0.005165289256198347
-epoch: 2, batch: 5, η: 0.004340277777777777
-epoch: 3, batch: 1, η: 0.0036982248520710057
-epoch: 3, batch: 2, η: 0.0031887755102040813
-epoch: 3, batch: 3, η: 0.002777777777777778
-epoch: 3, batch: 4, η: 0.00244140625
-epoch: 3, batch: 5, η: 0.002162629757785467
+epoch: 2, batch: 1, η: 0.01736111111111111
+epoch: 2, batch: 2, η: 0.01275510204081633
+epoch: 2, batch: 3, η: 0.009765625
+epoch: 3, batch: 1, η: 0.007716049382716049
+epoch: 3, batch: 2, η: 0.00625
+epoch: 3, batch: 3, η: 0.005165289256198347
 </code></pre>
 <p>The scheduled optimizer, <code>opt</code>, can be used anywhere a Flux optimizer can. For example, it can be passed to <code>Flux.train!</code>.</p>
 </article>
