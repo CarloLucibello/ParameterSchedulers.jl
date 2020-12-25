@@ -36,7 +36,7 @@ println(&quot;s[5]: $(s[5])&quot;)
 s[5]: 0.04096000000000001
 </code></pre>
 <div class="admonition info"><p class="admonition-title">Info</p>
-<p>The indices are unitless. So, if you index to a schedule every epoch, then the <code>s[i]</code> is parameter value at epoch <code>i</code>.</p>
+<p>The indices are unitless. So, if you index a schedule every epoch, then the <code>s[i]</code> is parameter value at epoch <code>i</code>.</p>
 </div>
 <p>We can also use the schedule in an iterable context like a <code>for</code>-loop:</p>
 <pre><code cell="getting-started" class="language-julia">for (i, param) in enumerate(s)
@@ -74,7 +74,7 @@ catch e
     println(e)
 end
 </code></pre>
-<pre><code class="plaintext cell-output cell-stream">MethodError(getindex, (ScheduleIterator{Exp{Float64},Int64}(Exp{Float64}(0.1, 0.8), 3), 1), 0x0000000000007016)
+<pre><code class="plaintext cell-output cell-stream">MethodError(getindex, (ScheduleIterator{Exp{Float64},Int64}(Exp{Float64}(0.1, 0.8), 3), 1), 0x000000000000709f)
 </code></pre>
 </article>
         <div id="page-navigation">
@@ -87,6 +87,7 @@ end
 <ul>
 <li><a href="../../docs/tutorials/getting-started.html">Getting started</a></li>
 <li><a href="../../docs/tutorials/basic-schedules.html">Basic schedules</a></li>
+<li><a href="../../docs/tutorials/optimizers.html">Optimizers</a></li>
 </ul>
 <p><a href="../../docstrings.html">API Reference</a></p>
 </nav>
