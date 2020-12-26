@@ -34,27 +34,39 @@
 </ul>
 <p><a href="../docstrings.html">API Reference</a></p>
 </nav>
-        <main id="page"><article><div class='docs' id='Sequence'>
-<p><code>public</code> <code>Sequence</code> — <code>parametric type</code></p>
+        <main id="page"><article><div class='docs' id='ScheduledOptim'>
+<p><code>public</code> <code>ScheduledOptim</code> — <code>parametric type</code></p>
 <div class='doc' id='1'>
-<pre><code>Sequence{T&lt;:AbstractVector, S&lt;:Integer} &lt;: AbstractSchedule
-Sequence(;schedules, step_sizes)
+<pre><code>ScheduledOptim{T&lt;:AbstractSchedule, O, F}
+ScheduledOptim(schedule::AbstractSchedule, opt, update_func)
+ScheduledOptim(schedule::AbstractSchedule, opt; update_func = (o, s) -&gt; (o.eta = s))
+(::Type{&lt;:AbstractSchedule})(opt; update_func = (o, s) -&gt; (o.eta = s), kwargs...)
 </code></pre>
-<p>A sequence of schedules.
-The output of this schedule is the concatenation of <code>schedules</code> where each
-schedule is evaluated for each step size in <code>step_sizes</code>.</p>
-<p>Note that <code>schedules</code> can also be a vector of numbers (not just schedules).</p>
+<p>Wrap a <code>schedule</code> and <code>opt</code> together into a <code>ScheduledOptim</code>.
+The <code>schedule</code> is iterated statefully using <a href="ParameterSchedulers.ScheduleIterator.html"><code>ScheduleIterator</code></a> on every
+call to <a href="https://github.com/FluxML/Flux.jl/blob/master/src/optimise/optimisers.jl"><code>Flux.apply!</code></a>.
+The <code>ScheduledOptim</code> can be used anywhere a Flux optimizer is used.</p>
+<p>The keyword argument constructor sets <code>update_func</code> to schedule the learning rate of <code>opt</code>.</p>
+<p>Instead of constructing <code>schedule</code> and <code>opt</code> separately,
+you can use the <code>::Type{&lt;:AbstractSchedule}</code> constructor (e.g. <a href="ParameterSchedulers.Exp.html"><code>Exp</code></a> below):</p>
+<pre><code class="language-julia"># create a Flux.Momentum optimizer
+# where the learning rate is adjusted with
+# Exp(λ = 0.1, γ = 0.8) decay schedule
+opt = Exp(Momentum(); λ = 0.1, γ = 0.8)
+</code></pre>
 <h1 id="arguments"><a href="#arguments" class="anchor"></a>Arguments</h1>
 <ul>
-<li><code>schedules::AbstractVector</code>: a vector of schedules or numbers</li>
-<li><code>step_sizes::Vector{&lt;:Integer}</code>: a vector of iteration lengths for each schedule</li>
+<li><code>schedule::AbstractSchedule</code>: the schedule to use</li>
+<li><code>opt</code>: a Flux optimizer</li>
+<li><code>update_func</code>: a mutating function of with inputs <code>(optim, param)</code>
+that updates <code>optim</code> based on the current <code>param</code> value</li>
 </ul>
 </div>
 </div>
 </article>
             <div id="page-navigation">
-                <a id="previous-page" title="Previous" href="ParameterSchedulers.ScheduledOptim.html"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.2426 6.34317L14.8284 4.92896L7.75739 12L14.8285 19.0711L16.2427 17.6569L10.5858 12L16.2426 6.34317Z" fill="currentColor" /></svg></a>
-                <a id="next-page" title="Next" href="ParameterSchedulers.Sin.html"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5858 6.34317L12 4.92896L19.0711 12L12 19.0711L10.5858 17.6569L16.2427 12L10.5858 6.34317Z" fill="currentColor" /></svg></a>
+                <a id="previous-page" title="Previous" href="ParameterSchedulers.ScheduleIterator.html"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.2426 6.34317L14.8284 4.92896L7.75739 12L14.8285 19.0711L16.2427 17.6569L10.5858 12L16.2426 6.34317Z" fill="currentColor" /></svg></a>
+                <a id="next-page" title="Next" href="ParameterSchedulers.Sequence.html"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5858 6.34317L12 4.92896L19.0711 12L12 19.0711L10.5858 17.6569L16.2427 12L10.5858 6.34317Z" fill="currentColor" /></svg></a>
             </div>
         </main>
     </div>

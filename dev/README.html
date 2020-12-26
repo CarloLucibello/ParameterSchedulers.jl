@@ -55,7 +55,7 @@ opt = Exp(Momentum(); λ = 1e-2, γ = 0.8)
 </thead>
 <tbody>
 <tr><td>
-<p><a href="docstrings/ParameterSchedulers.ParameterSchedulers.html"><code>Step(;λ, γ, step_sizes)</code></a></p>
+<p><a href="docstrings/ParameterSchedulers.Step.html" title="`Step`"><code>Step(;λ, γ, step_sizes)</code></a></p>
 </td>
 <td>
 <p>Exponential decay by <code>γ</code> every step in <code>step_sizes</code></p>
@@ -69,7 +69,7 @@ opt = Exp(Momentum(); λ = 1e-2, γ = 0.8)
     +---------------+ </code></pre>
 </td></tr>
 <tr><td>
-<p><a href="docstrings/ParameterSchedulers.ParameterSchedulers.html"><code>Exp(;λ, γ)</code></a></p>
+<p><a href="docstrings/ParameterSchedulers.Exp.html" title="`Exp`"><code>Exp(;λ, γ)</code></a></p>
 </td>
 <td>
 <p>Exponential decay by <code>γ</code> every iteration</p>
@@ -83,7 +83,7 @@ opt = Exp(Momentum(); λ = 1e-2, γ = 0.8)
     +---------------+ </code></pre>
 </td></tr>
 <tr><td>
-<p><a href="docstrings/ParameterSchedulers.ParameterSchedulers.html"><code>Poly(;λ, p, max_iter)</code></a></p>
+<p><a href="docstrings/ParameterSchedulers.Poly.html" title="`Poly`"><code>Poly(;λ, p, max_iter)</code></a></p>
 </td>
 <td>
 <p>Polynomial decay at degree <code>p</code></p>
@@ -97,7 +97,7 @@ opt = Exp(Momentum(); λ = 1e-2, γ = 0.8)
     +---------------+ </code></pre>
 </td></tr>
 <tr><td>
-<p><a href="docstrings/ParameterSchedulers.ParameterSchedulers.html"><code>Inv(;λ, γ, p)</code></a></p>
+<p><a href="docstrings/ParameterSchedulers.Inv.html" title="`Inv`"><code>Inv(;λ, γ, p)</code></a></p>
 </td>
 <td>
 <p>Inverse decay at rate <code>(1 + tγ)^p</code></p>
@@ -111,7 +111,7 @@ opt = Exp(Momentum(); λ = 1e-2, γ = 0.8)
     +---------------+ </code></pre>
 </td></tr>
 <tr><td>
-<p><a href="docstrings/ParameterSchedulers.ParameterSchedulers.html"><code>Tri(;λ0, λ1, period)</code></a></p>
+<p><a href="docstrings/ParameterSchedulers.Tri.html" title="`Tri`"><code>Tri(;λ0, λ1, period)</code></a></p>
 </td>
 <td>
 <p><a href="https://en.wikipedia.org/wiki/Triangle_wave">Triangle wave</a> function</p>
@@ -125,7 +125,7 @@ opt = Exp(Momentum(); λ = 1e-2, γ = 0.8)
     +---------------+ </code></pre>
 </td></tr>
 <tr><td>
-<p><a href="docstrings/ParameterSchedulers.ParameterSchedulers.html"><code>TriDecay2(;λ0, λ1, period)</code></a></p>
+<p><a href="docstrings/ParameterSchedulers.TriDecay2.html" title="`TriDecay2`"><code>TriDecay2(;λ0, λ1, period)</code></a></p>
 </td>
 <td>
 <p><a href="https://en.wikipedia.org/wiki/Triangle_wave">Triangle wave</a> function with half the amplitude every <code>period</code></p>
@@ -139,7 +139,7 @@ opt = Exp(Momentum(); λ = 1e-2, γ = 0.8)
     +---------------+ </code></pre>
 </td></tr>
 <tr><td>
-<p><a href="docstrings/ParameterSchedulers.ParameterSchedulers.html"><code>TriExp(;λ0, λ1, period, γ)</code></a></p>
+<p><a href="docstrings/ParameterSchedulers.TriExp.html" title="`TriExp`"><code>TriExp(;λ0, λ1, period, γ)</code></a></p>
 </td>
 <td>
 <p><a href="https://en.wikipedia.org/wiki/Triangle_wave">Triangle wave</a> function with exponential amplitude decay at rate <code>γ</code></p>
@@ -153,7 +153,7 @@ opt = Exp(Momentum(); λ = 1e-2, γ = 0.8)
     +---------------+ </code></pre>
 </td></tr>
 <tr><td>
-<p><a href="docstrings/ParameterSchedulers.ParameterSchedulers.html"><code>Sin(;λ0, λ1, period)</code></a></p>
+<p><a href="docstrings/ParameterSchedulers.Sin.html" title="`Sin`"><code>Sin(;λ0, λ1, period)</code></a></p>
 </td>
 <td>
 <p>Sine function</p>
@@ -167,7 +167,7 @@ opt = Exp(Momentum(); λ = 1e-2, γ = 0.8)
     +---------------+ </code></pre>
 </td></tr>
 <tr><td>
-<p><a href="docstrings/ParameterSchedulers.ParameterSchedulers.html"><code>SinDecay2(;λ0, λ1, period)</code></a></p>
+<p><a href="docstrings/ParameterSchedulers.SinDecay2.html" title="`SinDecay2`"><code>SinDecay2(;λ0, λ1, period)</code></a></p>
 </td>
 <td>
 <p>Sine function with half the amplitude every <code>period</code></p>
@@ -181,7 +181,7 @@ opt = Exp(Momentum(); λ = 1e-2, γ = 0.8)
     +---------------+ </code></pre>
 </td></tr>
 <tr><td>
-<p><a href="docstrings/ParameterSchedulers.ParameterSchedulers.html"><code>SinExp(;λ0, λ1, period)</code></a></p>
+<p><a href="docstrings/ParameterSchedulers.SinExp.html" title="`SinExp`"><code>SinExp(;λ0, λ1, period)</code></a></p>
 </td>
 <td>
 <p>Sine function with exponential amplitude decay at rate <code>γ</code></p>
@@ -195,7 +195,7 @@ opt = Exp(Momentum(); λ = 1e-2, γ = 0.8)
     +---------------+ </code></pre>
 </td></tr>
 <tr><td>
-<p><a href="docstrings/ParameterSchedulers.ParameterSchedulers.html"><code>Cos(;λ0, λ1, period)</code></a></p>
+<p><a href="docstrings/ParameterSchedulers.Cos.html" title="`Cos`"><code>Cos(;λ0, λ1, period)</code></a></p>
 </td>
 <td>
 <p>Cosine function</p>
