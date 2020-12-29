@@ -49,7 +49,7 @@ struct FooSchedule{T} &lt;: ParameterSchedulers.AbstractSchedule
     f::T
 end
 </code></pre>
-<p>Next we implement the necessart interfaces. The easiest implementation to define <code>Base.getindex</code>, then rely on that to define the iteration behavior.</p>
+<p>Next we implement the necessary interfaces. The easiest implementation to define <code>Base.getindex</code>, then rely on that to define the iteration behavior.</p>
 <pre><code cell="generic-interface" class="language-julia">Base.getindex(schedule::FooSchedule, t::Integer) = schedule.f(t)
 
 Base.iterate(schedule::FooSchedule, t = 1) = (schedule[t], t + 1)

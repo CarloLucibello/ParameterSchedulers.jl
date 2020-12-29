@@ -41,7 +41,7 @@
 <p><a href="../../docstrings.html">API Reference</a></p>
 </nav>
         <main id="page"><article><h1 id="decay-interface"><a href="#decay-interface" class="anchor"></a>Decay interface</h1>
-<p>Decay schedules conform the following definition:</p>
+<p>Decay schedules conform to the following definition:</p>
 <div class="display-math">\[s(t) = \lambda g(t)\]</div>
 <p>where <span class="math">\(s(t)\)</span> is the schedule output, <span class="math">\(\lambda\)</span> is the base (initial) value, and <span class="math">\(g(t)\)</span> is the decay function. Typically, the decay function is expected to be bounded between <span class="math">\([0, 1]\)</span>, but this requirement is only suggested and not enforced.</p>
 <p>Unlike the <a href="generic.html#generic-interface">generic interface</a>, the <a href="../../docstrings/ParameterSchedulers.DecaySchedule.html" title="`DecaySchedule`">decay interface</a> uses the formula above to abstract away most of the iteration and <code>Base.index</code> requirements. Instead, a simple interface exists for defining the components of the formula. The required functions and their descriptions are given below.</p>
