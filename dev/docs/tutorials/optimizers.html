@@ -118,7 +118,10 @@ epoch: 3, batch: 2, η: 0.01736111111111111
 epoch: 3, batch: 3, η: 0.014792899408284023
 </code></pre>
 <h2 id="working-with-flux-optimizers"><a href="#working-with-flux-optimizers" class="anchor"></a>Working with Flux optimizers</h2>
-<p>While the approaches above can be helpful when dealing with fine-grained training loops, it is usually simpler to just use a <a href="../../docstrings/ParameterSchedulers.ScheduledOptim.html"><code>ScheduledOptim</code></a>.</p>
+<div class="admonition danger"><p class="admonition-title">Danger</p>
+<p>Currently, we are porting <code>ScheduledOptim</code> to Flux.jl. Until that is complete, you will need to manually copy the code in <code>src/optimizers.jl</code>.</p>
+</div>
+<p>While the approaches above can be helpful when dealing with fine-grained training loops, it is usually simpler to just use a <a href="#"><code>ScheduledOptim</code></a>.</p>
 <pre><code cell="optimizers" class="language-julia">nepochs = 3
 s = Inv(λ = 1e-1, p = 2, γ = 0.2)
 opt = ScheduledOptim(s, Descent())
@@ -130,16 +133,7 @@ for epoch in 1:nepochs
     end
 end
 </code></pre>
-<pre><code class="plaintext cell-output cell-stream">epoch: 1, batch: 1, η: 0.06944444444444445
-epoch: 1, batch: 2, η: 0.0390625
-epoch: 1, batch: 3, η: 0.025
-epoch: 2, batch: 1, η: 0.01736111111111111
-epoch: 2, batch: 2, η: 0.01275510204081633
-epoch: 2, batch: 3, η: 0.009765625
-epoch: 3, batch: 1, η: 0.007716049382716049
-epoch: 3, batch: 2, η: 0.00625
-epoch: 3, batch: 3, η: 0.005165289256198347
-</code></pre>
+<pre><code class="plaintext cell-output cell-result" class="language-plaintext">LoadError(&quot;string&quot;, 3, UndefVarError(:ScheduledOptim))</code></pre>
 <p>The scheduled optimizer, <code>opt</code>, can be used anywhere a Flux optimizer can. For example, it can be passed to <code>Flux.train!</code>.</p>
 </article>
             <div id="page-navigation">

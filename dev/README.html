@@ -48,6 +48,9 @@
 
 opt = Exp(Momentum(); λ = 1e-2, γ = 0.8)
 </code></pre>
+<div class="admonition danger"><p class="admonition-title">Danger</p>
+<p>Currently, we are porting <code>ScheduledOptim</code> to Flux.jl. Until that is complete, you will need to manually copy the code in <code>src/optimizers.jl</code>.</p>
+</div>
 <h2 id="available-schedules"><a href="#available-schedules" class="anchor"></a>Available Schedules</h2>
 <p>This is a table of the common schedules implemented, but ParameterSchedulers provides utilities for creating more exotic schedules as well. You can read <a href="https://arxiv.org/abs/1908.06477">this paper</a> for more information on the schedules below.</p>
 <table>

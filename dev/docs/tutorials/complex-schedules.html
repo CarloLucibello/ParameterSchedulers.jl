@@ -43,7 +43,7 @@
         <main id="page"><article><h1 id="complex-schedules"><a href="#complex-schedules" class="anchor"></a>Complex schedules</h1>
 <p>While the <a href="basic-schedules.html#basic-schedules">basic schedules</a> tutorial covered the simple decay and cyclic schedules available in ParameterSchedulers.jl, it is possible to more complex schedules for added flexibility.</p>
 <h2 id="arbitrary-functions"><a href="#arbitrary-functions" class="anchor"></a>Arbitrary functions</h2>
-<p>Sometimes, a simple function is the easiest way to specify a schedule. Similar to PyTorch’s <a href="https://pytorch.org/docs/master/optim.html?highlight=lambdalr#torch.optim.lr_scheduler.LambdaLR"><code>LambdaLR</code></a>, ParameterSchedulers.jl provides <a href="../../docstrings/ParameterSchedulers.Lambda.html"><code>Lambda</code></a>. Unlike the decay or cyclic schedules that conform to a formula, <code>Lambda</code> simply wraps a given function, <code>f</code>, and its output is <code>f(t)</code>. But, unlike like <code>f</code> alone, <code>Lambda</code> can be indexed and iterated like all schedules. Below, we wrap a logarithmic function as a schedule.</p>
+<p>Sometimes, a simple function is the easiest way to specify a schedule. Similar to PyTorch’s <a href="https://pytorch.org/docs/master/optim.html?highlight=lambdalr#torch.optim.lr_scheduler.LambdaLR"><code>LambdaLR</code></a>, ParameterSchedulers.jl provides <a href="../../docstrings/ParameterSchedulers.Lambda.html"><code>Lambda</code></a>. Unlike the decay or cyclic schedules that conform to a formula, <code>Lambda</code> simply wraps a given function, <code>f</code>, and the schedule output is <code>f(t)</code>. But, unlike like <code>f</code> alone, <code>Lambda</code> can be indexed and iterated like all schedules. Below, we wrap a logarithmic function as a schedule.</p>
 <pre><code cell="complex-schedules" class="language-julia">using UnicodePlots
 
 s = Lambda(f = log)
@@ -69,7 +69,7 @@ lineplot(t, map(t -&gt; s[t], t); border = :none)
  
      1                                       10</code></pre>
 <h2 id="arbitrary-looping-schedules"><a href="#arbitrary-looping-schedules" class="anchor"></a>Arbitrary looping schedules</h2>
-<p>We might wish to take the notion of <a href="../../docstrings/ParameterSchedulers.Lambda.html"><code>Lambda</code></a> one step further, and instead define how a schedule behaves over a given interval or period. Then, we would like to loop that interval over and over. This is precisely what <a href="../../docstrings/ParameterSchedulers.Loop.html"><code>Loop</code></a> achieves. For example, we may wish to apply an <a href="../../docstrings/ParameterSchedulers.Exp.html"><code>Exp</code></a> schedule for 10 iterations, then repeat from the beginning, and so forth.</p>
+<p>Let’s take the notion of <a href="../../docstrings/ParameterSchedulers.Lambda.html"><code>Lambda</code></a> one step further, and instead define how a schedule behaves over a given interval or period. Then, we would like to loop that interval over and over. This is precisely what <a href="../../docstrings/ParameterSchedulers.Loop.html"><code>Loop</code></a> achieves. For example, we may want to apply an <a href="../../docstrings/ParameterSchedulers.Exp.html"><code>Exp</code></a> schedule for 10 iterations, then repeat from the beginning, and so forth.</p>
 <pre><code cell="complex-schedules" class="language-julia">s = Loop(f = Exp(λ = 0.1, γ = 0.4), period = 10)
 t = 1:25 |&gt; collect
 lineplot(t, map(t -&gt; s[t], t); border = :none)
@@ -93,7 +93,7 @@ lineplot(t, map(t -&gt; s[t], t); border = :none)
  
        0                                       30</code></pre>
 <h2 id="sequences-of-schedules"><a href="#sequences-of-schedules" class="anchor"></a>Sequences of schedules</h2>
-<p>Finally, we may wish to concatenate sequences of schedules, applying each one for a given length, then switch to the next schedule in the order. A <a href="../../docstrings/ParameterSchedulers.Sequence.html"><code>Sequence</code></a> schedule lets us do this. For example, we might start with a cyclic schedule, then switch to a more conservative exponential schedule half way through training.</p>
+<p>Finally, we might concatenate sequences of schedules, applying each one for a given length, then switch to the next schedule in the order. A <a href="../../docstrings/ParameterSchedulers.Sequence.html"><code>Sequence</code></a> schedule lets us do this. For example, we can start with a cyclic schedule, then switch to a more conservative exponential schedule half way through training.</p>
 <pre><code cell="complex-schedules" class="language-julia">nepochs = 50
 s = Sequence(schedules = [Tri(λ0 = 0.0, λ1 = 0.5, period = 5), Exp(λ = 0.5, γ = 0.5)],
              step_sizes = [nepochs ÷ 2, nepochs ÷ 2])
