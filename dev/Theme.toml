@@ -1,4 +1,4 @@
-theme = "darsnack"
+theme = "darsnack-theme"
 version = "0.1.0"
 
 [html]
