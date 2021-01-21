@@ -49,7 +49,7 @@
 <p><a href="../../docstrings.html">API Reference</a></p>
 </div>
         <article id="content"><h1 id="generic-interface"><a href="#generic-interface" class="anchor"></a>Generic interface</h1>
-<p>All schedules must inherit from <a href="../../docstrings/ParameterSchedulers.AbstractSchedule.html"><code>AbstractSchedule</code></a>. Any concrete subtype must implement the <a href="https://docs.julialang.org/en/v1/manual/interfaces/#man-interface-iteration">iteration interface</a> and <a href="https://docs.julialang.org/en/v1/manual/interfaces/#Indexing"><code>Base.getindex</code></a>. Below we reimplment <a href="../../docstrings/ParameterSchedulers.Lambda.html"><code>Lambda</code></a> to illustrate what is required for another generic custom schedule.</p>
+<p>All schedules must inherit from <a href="../../docstrings/ParameterSchedulers.AbstractSchedule.html"><code>AbstractSchedule</code></a>. Any concrete subtype must implement the <a href="https://docs.julialang.org/en/v1/manual/interfaces/#man-interface-iteration">iteration interface</a> and <a href="https://docs.julialang.org/en/v1/manual/interfaces/#Indexing"><code>Base.getindex</code></a>. Below we reimplement <a href="../../docstrings/ParameterSchedulers.Lambda.html"><code>Lambda</code></a> to illustrate what is required for another generic custom schedule.</p>
 <p>To avoid a name conflict, we will call our custom schedule <code>FooSchedule</code>. Let’s start with defining the struct.</p>
 <pre><code cell="generic-interface" class="language-julia">using ParameterSchedulers
 
