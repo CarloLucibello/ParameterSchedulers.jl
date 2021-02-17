@@ -82,21 +82,21 @@ s[10]: 0.013421772800000007
 </div>
 <p>Notice that the value of <code>s[1]</code> and <code>s[5]</code> is unchanged even though we accessed the schedule once via <code>getindex</code> and again in the <code>for</code>-loop. This is because all schedules in ParameterSchedulers.jl are <em>immutable</em>. If you want a stateful schedule, then you can use <a href="../../docstrings/ParameterSchedulers.ScheduleIterator.html"><code>ScheduleIterator</code></a>:</p>
 <pre><code cell="getting-started" class="language-julia">stateful_s = ScheduleIterator(s)
-println(&quot;s: $(next!(stateful_s))&quot;)
-println(&quot;s: $(next!(stateful_s))&quot;)
+println(&quot;s: $(ParameterSchedulers.next!(stateful_s))&quot;)
+println(&quot;s: $(ParameterSchedulers.next!(stateful_s))&quot;)
 println(stateful_s)
 </code></pre>
 <pre><code class="plaintext cell-output cell-stream">s: 0.1
 s: 0.08000000000000002
 ScheduleIterator{Exp{Float64},Int64}(Exp{Float64}(0.1, 0.8), 3)
 </code></pre>
-<p>We used <a href="../../docstrings/ParameterSchedulers.next!.html"><code>next!</code></a> to advance the stateful iterator. Notice that <code>stateful_s</code> stores a reference to <code>s</code> and the current iteration state (which is <code>3</code> since we advanced the iterator twice). Also note that <code>ScheduleIterator</code> cannot be indexed (or iterated with <code>Base.iterate</code>):</p>
+<p>We used <a href="../../docstrings/ParameterSchedulers.next!.html"><code>ParameterSchedulers.next!</code></a> to advance the stateful iterator. Notice that <code>stateful_s</code> stores a reference to <code>s</code> and the current iteration state (which is <code>3</code> since we advanced the iterator twice). Also note that <code>ScheduleIterator</code> cannot be indexed (or iterated with <code>Base.iterate</code>):</p>
 <pre><code cell="getting-started" class="language-julia">try stateful_s[1]
 catch e
     println(e)
 end
 </code></pre>
-<pre><code class="plaintext cell-output cell-stream">MethodError(getindex, (ScheduleIterator{Exp{Float64},Int64}(Exp{Float64}(0.1, 0.8), 3), 1), 0x000000000000785e)
+<pre><code class="plaintext cell-output cell-stream">MethodError(getindex, (ScheduleIterator{Exp{Float64},Int64}(Exp{Float64}(0.1, 0.8), 3), 1), 0x000000000000788a)
 </code></pre>
 </article>
         <div id="page-navigation">
